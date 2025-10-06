@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post - Comments Section</title>
+    <style>
+        /* CSS is included here for simplicity. In a real project, this would be a separate file. */
+        body { font-family: Arial, sans-serif; background-color: #f4f7f6; margin: 20px; }
+        .comments-container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background-color: #ffffff; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        }
+        h2 { border-bottom: 2px solid #3b82f6; padding-bottom: 10px; color: #1f2937; }
+
+        /* Comment Submission Form Styles */
+        .comment-form textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; resize: vertical; }
+        .comment-form button { 
+            background-color: #3b82f6; 
+            color: white; 
+            padding: 10px 15px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
+        .comment-form button:hover { background-color: #2563eb; }
+
+        /* Individual Comment Styles */
+        .comment { border-left: 3px solid #3b82f6; padding: 15px; margin-bottom: 15px; background-color: #f9f9f9; border-radius: 4px; }
+        .comment-header { display: flex; align-items: center; margin-bottom: 8px; }
+        .comment-author { font-weight: bold; color: #1f2937; margin-right: 10px; }
+        .comment-date { font-size: 0.8em; color: #6b7280; }
+        .comment-body { margin-top: 5px; color: #374151; }
+    </style>
+</head>
+<body>
+
+<div class="comments-container">
+    <h1>Blog Post Title Goes Here</h1>
+    <p>... (Blog post content above) ...</p>
+    
+    <h2>Leave a Comment</h2>
+    <form class="comment-form" id="commentForm">
+        <textarea id="commentText" placeholder="Share your opinion..." required></textarea>
+        <button type="submit" id="submitButton">Submit Comment</button>
+    </form>
+    
+    <h2>Comments (<span id="commentCount">2</span>)</h2>
+    <div id="commentsList">
+        
+        <div class="comment">
+            <div class="comment-header">
+                <span class="comment-author">Reader 1</span>
+                <span class="comment-date">2 hours ago</span>
+            </div>
+            <div class="comment-body">
+                This is a very insightful article! Thanks for sharing your thoughts on the topic.
+            </div>
+        </div>
+        
+        <div class="comment">
+            <div class="comment-header">
+                <span class="comment-author">Derishaa.R.V (Author)</span>
+                <span class="comment-date">1 hour ago</span>
+            </div>
+            <div class="comment-body">
+                Glad you found it helpful! I'll be posting on a related topic next week.
+            </div>
+        </div>
+        
+        </div>
+
+</div>
+
+<script>
+    // --- JAVASCRIPT PSEUDOCODE FOR DYNAMIC BEHAVIOR ---
+    const commentForm = document.getElementById('commentForm');
+    const commentsList = document.getElementById('commentsList');
+    const commentCount = document.getElementById('commentCount');
+    const submitButton = document.getElementById('submitButton');
+    let currentCount = 2; // Initial count
+
+    commentForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const commentText = document.getElementById('commentText').value.trim();
+        if (!commentText) return;
+
+        // 1. Simulate API call start (Phase 3: Fix bugs and optimize performance)
+        submitButton.textContent = 'Posting...';
+        submitButton.disabled = true;
+
+        // In the real app (Phase 4), this would be an AJAX call to POST /blogs/:id/comments [cite: 92]
+        setTimeout(() => { 
+            // 2. Simulate successful response and comment rendering (Phase 1: Comments are displayed immediately after posting) 
+            
+            const newCommentHTML = `
+                <div class="comment new-comment">
+                    <div class="comment-header">
+                        <span class="comment-author">Current User</span>
+                        <span class="comment-date">Just now</span>
+                    </div>
+                    <div class="comment-body">
+                        ${commentText}
+                    </div>
+                </div>
+            `;
+            
+            // Prepend the new comment to the list
+            commentsList.insertAdjacentHTML('afterbegin', newCommentHTML); 
+
+            // Update count
+            currentCount++;
+            commentCount.textContent = currentCount;
+
+            // Reset form and button
+            document.getElementById('commentText').value = '';
+            submitButton.textContent = 'Submit Comment';
+            submitButton.disabled = false;
+        }, 1500); // Simulated network delay
+    });
+</script>
+
+</body>
+</html>
